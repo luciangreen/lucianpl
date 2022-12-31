@@ -78,7 +78,7 @@ List1=[],
 %is_list(Item),
 
 number_index(Number_index1),
-Number_index2 is Number_index1+1,
+Number_index2 is Number_index1,
 
 retractall(number_index(_)),
 assertz(number_index(Number_index2)),
