@@ -24,7 +24,7 @@ uncompile_list([],_,L,L) :- !.
 uncompile_list(N,S,L1,L2) :-
  N=[[_,_]|N1],
  S=[_,_|S1],
- uncompile_list(1,N1,S1,L1,[L2]). % 1 needs to be 0 in C x not in C
+ uncompile_list(1,N1,S1,L1,[L2]). % 1 needs to be 0 in C x not in C (for testing)
  
 uncompile_list(Index,N,S,L1,L2) :-
  get_item_n(N,Index,N1),
