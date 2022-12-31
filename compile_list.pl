@@ -11,6 +11,8 @@
 % string array: index 0: [2 (array length)] 1:[a], 2: [b]
 
 % also: 3-atom code
+% also: 5-variable name code
+% also: 6-predicate name code
 
 % length of array lists in array
 
@@ -19,6 +21,8 @@
 
 % compile_list([[a,b],1],N,S),writeln(N),writeln(S).
 
+
+:- include('../listprologinterpreter/listprolog.pl').
 
 :- dynamic number_index/1.
 :- dynamic string_index/1.
@@ -30,7 +34,7 @@ assertz(number_index(0)),
 retractall(string_index(_)),
 assertz(string_index(-1)),
 
- compile_list(0, List, [], Number_array1, [], String_array1),
+ compile_list1(0, [List], [], Number_array1, [], String_array1),
  
  % add ends, sort and findall lists, array lengths
  %trace,
@@ -102,6 +106,100 @@ compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_a
 
 compile_list(_, [], Number_array, Number_array, String_array, String_array) :- !. 
 
+
+
+compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_array2) :-
+
+List1=[Item0 | List2],
+
+variable_name(Item0),
+
+Item0=[_,Item],
+
+/*
+(variable_name(List1)->
+
+(List1=[_,Item],List2=[]
+);
+(List1=[Item0 | List2],
+variable_name(Item0),
+Item0=[_,Item]
+)),
+*/
+
+(member([String_index2,Item],String_array1)->
+(String_array1=String_array3%true%append(String_array1,[String_index2,Array2],Number_array4))
+);
+(string_index(String_index1),
+String_index2 is String_index1+1,
+
+retractall(string_index(_)),
+assertz(string_index(String_index2)),
+
+append(String_array1,[[String_index2,Item]],String_array3)
+)),
+
+
+(member([Index,Array1],Number_array1)->
+(append(Array1, [5,String_index2], Array2),
+delete(Number_array1,[Index,_],Number_array3),
+append(Number_array3,[[Index,Array2]],Number_array4));
+
+(append([], [5,String_index2], Array2),
+%delete(Number_array1,[Index,_],Number_array2),
+append(Number_array1,[[Index,Array2]],Number_array4))),
+
+%compile_list(Number_index2, Item, Number_array4, Number_array5, String_array1, String_array3),
+
+compile_list(Index, List2, Number_array4, Number_array2, String_array3, String_array2).
+
+
+compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_array2) :-
+
+List1=[Item0 | List2],
+
+predicate_or_rule_name(Item0),
+
+Item0=[_,Item],
+
+/*
+(predicate_or_rule(List1)->
+
+(List1=[_,Item],List2=[]
+);
+(List1=[Item0 | List2],
+predicate_or_rule(Item0),
+Item0=[_,Item]
+)),
+*/
+
+(member([String_index2,Item],String_array1)->
+(String_array1=String_array3%true%append(String_array1,[String_index2,Array2],Number_array4))
+);
+(string_index(String_index1),
+String_index2 is String_index1+1,
+
+retractall(string_index(_)),
+assertz(string_index(String_index2)),
+
+append(String_array1,[[String_index2,Item]],String_array3)
+)),
+
+
+(member([Index,Array1],Number_array1)->
+(append(Array1, [6,String_index2], Array2),
+delete(Number_array1,[Index,_],Number_array3),
+append(Number_array3,[[Index,Array2]],Number_array4));
+
+(append([], [6,String_index2], Array2),
+%delete(Number_array1,[Index,_],Number_array2),
+append(Number_array1,[[Index,Array2]],Number_array4))),
+
+%compile_list(Number_index2, Item, Number_array4, Number_array5, String_array1, String_array3),
+
+compile_list(Index, List2, Number_array4, Number_array2, String_array3, String_array2).
+
+
 compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_array2) :-
 
 List1=[Item | List2],
@@ -131,9 +229,22 @@ compile_list(Index, List2, Number_array5, Number_array2, String_array3, String_a
 
 compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_array2) :-
 
+
 List1=[Item | List2],
 
 number(Item),
+
+/*
+(number(List1)->
+
+(List1=Item,List2=[]
+);
+(List1=[Item0 | List2],
+number(Item0),
+Item0=Item
+)),
+*/
+
 
 (member([Index,Array1],Number_array1)->
 (append(Array1, [1,Item], Array2),
@@ -154,6 +265,18 @@ compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_a
 List1=[Item | List2],
 
 string(Item),
+
+
+/*
+(string(List1)->
+
+(List1=Item,List2=[]
+);
+(List1=[Item0 | List2],
+string(Item0),
+Item0=Item
+)),
+*/
 
 (member([String_index2,Item],String_array1)->
 (String_array1=String_array3%true%append(String_array1,[String_index2,Array2],Number_array4))
@@ -187,6 +310,17 @@ compile_list(Index, List1, Number_array1, Number_array2, String_array1, String_a
 List1=[Item | List2],
 
 atom(Item),
+
+/*
+(atom(List1)->
+
+(List1=Item,List2=[]
+);
+(List1=[Item0 | List2],
+atom(Item0),
+Item0=Item
+)),
+*/
 
 (member([String_index2,Item],String_array1)->
 (String_array1=String_array3%true%append(String_array1,[String_index2,Array2],Number_array4))
