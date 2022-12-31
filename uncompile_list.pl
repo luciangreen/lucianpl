@@ -1,5 +1,7 @@
 % uncompile_list.pl
 
+% can be modified to be list to string, equals4 in C
+
 :-include('compile_list.pl').
 
 /*
