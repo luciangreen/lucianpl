@@ -14,6 +14,8 @@
 % also: 5-variable name code
 % also: 6-predicate name code
 
+% * later: v,p names as strings (former as atoms)
+
 % length of array lists in array
 
 % first item is item 0 in N and 0 in S
