@@ -179,16 +179,16 @@ N3=[[X1,Y1]|S315],
 !.
 
 /*
-[debug]  ?- point_dups([1,1,2,2,3],1,[],A,[],B,[],C).                               A = [[1, 1], [2, 3], [3, 5]],
+[debug]  ?- point_dups(["a","a",b,b,"c"],1,[],A,[],B,[],C,[],D).                               A = [["a", 1], [b, 3], ["c", 5]],
 non duplicated items and their indices
 
 B = [[1, 1], [2, 1], [3, 3], [4, 3], [5, 5]],
 (duplicated items x all items), their former indices and the indices of the items they are duplicates of
 
-C = [1, 2, 3].
+C = ["a", b, "c"].
 non duplicated items
 
-D = [1,1,3,3,5],
+D = [0, 0, 2, 2, 4],
 (duplicated items x all items), (their former indices x) and the indices of the items they are duplicates of
 
 
