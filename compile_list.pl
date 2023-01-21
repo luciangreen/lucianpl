@@ -4,11 +4,11 @@
 
 % A=[[a,b],1]
 
-% number array: index 0: [2 (number array length)]
+% number array: index 0: [2 (number array length), 5 (max length of a list)]
 % index 1:[0 (list code), 2 (number array index), 1 (number code), 1 (value), 4 (end code)]
 % index 2: [2 (string code),1 (string array index), 2 (string code),2 (string array index), 4 (end code)]
 
-% string array: index 0: [2 (array length)] 1:[a], 2: [b]
+% string array: index 0: [2 (array length), 1 (maximum string length of a string/atom)] 1:[a], 2: [b]
 
 % also: 3-atom code
 % also: 5-variable name code
