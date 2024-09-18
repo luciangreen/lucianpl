@@ -24,7 +24,7 @@
 % compile_list([[a,b],1],N,S),writeln(N),writeln(S).
 
 
-:- include('../listprologinterpreter/listprolog.pl').
+:-include('../listprologinterpreter/listprolog.pl').
 
 :- dynamic number_index/1.
 :- dynamic string_index/1.
